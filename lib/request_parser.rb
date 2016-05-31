@@ -4,7 +4,7 @@ require './lib/server'
 
 class RequestParser
   def initialize
-    server = Server.new
+    # server = Server.new
     request_lines = server.request_lines
   end
 
