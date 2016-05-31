@@ -68,4 +68,10 @@ class RequestParserTest < Minitest::Test
       assert_equal expected, parser.response
     end
 
+    def test_response_to_hash
+
+      assert_equal "/", parser.response_hash['Path']
+      assert_equal "GET", parser.response_hash['Verb']
+      assert_equal "HTTP/1.1", parser.response_hash['Protocol']
+    end
   end
