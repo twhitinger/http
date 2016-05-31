@@ -29,6 +29,6 @@ class Server
   end
 
 end
-
-server = Server.new
-server.start_server
+# 
+# server = Server.new
+# server.start_server
