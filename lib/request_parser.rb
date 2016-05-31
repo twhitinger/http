@@ -37,6 +37,18 @@ class RequestParser
     request[6].split(":")[1].strip
   end
 
+  def response_hash
+    {
+    "Verb" => verb,
+    "Path" => path,
+    "Protocol" => protocol,
+    "Host" => host,
+    "Port" => port,
+    "Origin" => origin,
+    "Accept" => accept
+   }
+  end
+
   def response
     "\nVerb: #{verb}\n" +
     "Path: #{path}\n" +

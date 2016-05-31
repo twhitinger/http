@@ -1,6 +1,7 @@
 require 'socket'
 require 'pry'
 require './request_parser'
+require './html_wrapper'
 
 
 # iteration 0
@@ -17,18 +18,22 @@ class Server
       # output = "<html><body>#{response}</body></html>"
       request = RequestParser.new(server_request)
 
+      path = request.response_hash['Path']
+      # output = Path.new(path)
+      @client.puts HtmlWrapper.wrap_response_in_html(request.response) if path == "/"
 
-      @client.puts output(request.response)
+
+
       # output(counter)
       counter += 1
       @client.close
     end
   end
 
-  def output(request)
-    response = "<pre> #{request} </pre>"
-    "<html><body>#{response}</body></html>"
-  end
+  # def output(request)
+  #   response = "<pre> #{request} </pre>"
+  #   "<html><body>#{response}</body></html>"
+  # end
 
   # def output(count)
   #   response = "<pre>" + "Hello, World! (#{count})" + "</pre>"
