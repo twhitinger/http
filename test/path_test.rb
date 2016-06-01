@@ -29,12 +29,11 @@ class PathTest < Minitest::Test
   #   assert_equal "/shutdown", path.shutdown
   # end
 
-  # def test_faraday
-  #   server = Server.new
-  #   server.start_server
-  #   binding.pry
-  #
-  #   # conn = Faraday.new(:url => 'http://127.0.0.1:9292/shutdown')
-  #   response = Faraday.get 'http://127.0.0.1:9292'
-  # end
+  def test_faraday
+
+
+    # conn = Faraday.new(:url => 'http://127.0.0.1:9292/shutdown')
+    response = Faraday.get 'http://127.0.0.1:9292'
+    binding.pry
+  end
 end
