@@ -50,11 +50,6 @@ class RequestParserTest < Minitest::Test
       assert_equal "127.0.0.1", parser.origin
     end
 
-    def test_it_returns_accept
-
-      assert_equal "*/*", parser.accept
-    end
-
     def test_it_packages_response
 
       expected =

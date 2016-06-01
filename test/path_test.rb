@@ -1,6 +1,5 @@
 require './test/test_helper'
 require './lib/path'
-require './lib/server'
 require './lib/request_parser'
 require 'faraday'
 
@@ -24,28 +23,28 @@ class PathTest < Minitest::Test
     end
 
     def test_path_equals_root
-      path = Path.new("/", @parser, 0)
+      path = Path.new("/", @parser)
 
       assert_equal "/", path.root
     end
-    #
-    # def test_path_equals_slash_hello
-    #   skip
-    #   path = Path.new
-    #   assert_equal "/hello", path.hello
-    # end
-    #
-    # def test_path_equals_slash_datetime
-    #   skip
-    #   path = Path.new
-    #   assert_equal "/datetime", path.datetime
-    # end
-    #
-    # def test_path_equals_slash_shutdown
-    #   skip
-    #   path = Path.new
-    #   assert_equal "/shutdown", path.shutdown
-    # end
+
+    def test_path_equals_slash_hello
+      path = Path.new("/hello", @parser)
+
+      assert_equal "Hello World!(0)", path.hello
+    end
+
+    def test_path_equals_slash_datetime
+      path = Path.new("/datetime", @parser)
+
+      assert_equal "#{Time.now.strftime('%l:%M %p on %A, %B %e, %Y')}", path.datetime
+    end
+
+    def test_path_equals_slash_shutdown
+      path = Path.new("/shutdown", @parser)
+
+      assert_equal "Total Requests: 0", path.shutdown
+    end
 
     # def test_faraday
     #   # conn = Faraday.new(:url => 'http://127.0.0.1:9292/shutdown')

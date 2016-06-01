@@ -14,9 +14,7 @@ class Server
       @client = tcp_server.accept
       request = RequestParser.new(server_request)
       @path = Path.new(request.path,request.response,counter)
-
       output = "<html><head></head><body><pre>#{path.path_finder}</pre></body></html>"
-      # html_wrapper(path)
       print_or_shutdown(output)
       counter += 1
       client.close
@@ -42,6 +40,3 @@ class Server
     request_lines
   end
 end
-
-# server = Server.new
-# server.start_server
