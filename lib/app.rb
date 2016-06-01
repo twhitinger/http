@@ -1,6 +1,11 @@
 require './lib/server'
-def start
-  server = Server.new
-  server.start_server
+class AppStart
+
+  def start
+    server = Server.new
+    server.start_server
+  end
+
 end
-start
+app_start = AppStart.new
+app_start.start

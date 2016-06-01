@@ -1,9 +1,9 @@
-require './lib/html_wrapper'
-
+require "./lib/word_find"
+require "pry"
 
 class Path
   attr_reader :path, :request
-  def initialize(path,request,counter)
+  def initialize(path,request,counter = 0)
     @path = path
     @request = request
     @counter = counter
@@ -16,8 +16,10 @@ class Path
       hello
     elsif path == "/datetime"
       datetime
-    else
+    elsif path == "/shutdown"
       shutdown
+    elsif path == "/word_search=#{path.split("=")[1]}"
+      word_find(path.split("=")[1])
     end
   end
 
@@ -33,12 +35,15 @@ class Path
 
   def datetime
     # @status_code = ok
-    "#{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}"
+    "#{Time.now.strftime('%l:%M %p on %A, %B %e, %Y')}"
   end
 
   def shutdown
-
    "Total Requests: #{@counter}"
+  end
+
+  def word_find(word)
+    WordFind.new.find(word)
   end
 
 end
