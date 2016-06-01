@@ -1,5 +1,5 @@
-require './html_wrapper'
-require './request_parser'
+require './lib/html_wrapper'
+
 
 class Path
   attr_reader :path, :request

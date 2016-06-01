@@ -1,8 +1,7 @@
 require 'socket'
 require 'pry'
-require './request_parser'
-require './html_wrapper'
-require './path.rb'
+require './lib/request_parser'
+require './lib/path.rb'
 
 class Server
 
@@ -21,12 +20,8 @@ class Server
   end
 
   def print_or_shutdown(path)
-    if path.path_finder == path.shutdown
-      @client.puts path.path_finder
-      exit
-    else
-      @client.puts path.path_finder
-    end
+    @client.puts path.path_finder
+    exit if path.path_finder == path.shutdown
   end
 
   def server_request
