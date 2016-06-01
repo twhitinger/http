@@ -1,30 +1,34 @@
 require './html_wrapper'
+require './request_parser'
 
 class Path
-  attr_reader :path
-  def initialize(path)
+  attr_reader :path, :request
+  def initialize(path,request,counter)
     @path = path
+    @request = request
+    @counter = counter
   end
 
-  if path == "/"
-    root
-  elsif path == "/hello"
-    hello
-  elsif path == "/datetime"
-    datetime
-  else
-    shutdown
+  def path_finder
+    if path == "/"
+      root
+    elsif path == "/hello"
+      hello
+    elsif path == "/datetime"
+      datetime
+    else
+      shutdown
+    end
   end
 
   def root
     # @status_code = ok
-    HtmlWrapper.wrap_response_in_html(request.response)
+    HtmlWrapper.wrap_response_in_html(request)
   end
 
   def hello
-    # @count += 1
     # @status_code = ok
-    # "Hello World! (#{@count})"
+    HtmlWrapper.wrap_response_in_html("Hello World!(#{@counter})")
   end
 
   def datetime
