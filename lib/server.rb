@@ -4,8 +4,6 @@ require './request_parser'
 require './html_wrapper'
 require './path.rb'
 
-
-# iteration 0
 class Server
 
   def start_server
@@ -14,30 +12,22 @@ class Server
 
     loop do
       @client = tcp_server.accept
-      # response = "<pre>" + "Hello, World! (#{counter})" + "</pre>"
-      # output = "<html><body>#{response}</body></html>"
       request = RequestParser.new(server_request)
       path = Path.new(request.path,request.response,counter)
-
-      # path = request.response_hash['Path']
-      # output = Path.new(path)
-      @client.puts path.path_finder
-
-      # output(counter)
+      print_or_shutdown(path)
       counter += 1
       @client.close
     end
   end
 
-  # def output(request)
-  #   response = "<pre> #{request} </pre>"
-  #   "<html><body>#{response}</body></html>"
-  # end
-
-  # def output(count)
-  #   response = "<pre>" + "Hello, World! (#{count})" + "</pre>"
-  #   "<html><body>#{response}</body></html>"
-  # end
+  def print_or_shutdown(path)
+    if path.path_finder == path.shutdown
+      @client.puts path.path_finder
+      exit
+    else
+      @client.puts path.path_finder
+    end
+  end
 
   def server_request
     request_lines = []
@@ -46,10 +36,7 @@ class Server
     end
     request_lines
   end
-
-
-
 end
-#
+
 server = Server.new
 server.start_server
