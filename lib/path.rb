@@ -33,11 +33,12 @@ class Path
 
   def datetime
     # @status_code = ok
-    "#{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}"
+    HtmlWrapper.wrap_response_in_html("#{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}")
   end
 
   def shutdown
 
+   HtmlWrapper.wrap_response_in_html("Total Requests: #{@counter}")
   end
 
 end
