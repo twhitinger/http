@@ -7,7 +7,6 @@ require 'faraday'
 class PathTest < Minitest::Test
   def setup
     @parser = RequestParser.new(request).path
-
   end
 
   def request
@@ -46,9 +45,54 @@ class PathTest < Minitest::Test
       assert_equal "Total Requests: 0", path.shutdown
     end
 
-    # def test_faraday
-    #   # conn = Faraday.new(:url => 'http://127.0.0.1:9292/shutdown')
-    #   response = Faraday.get 'http://127.0.0.1:9292'
-    #
-    # end
+    def test_faraday_hello_path
+      skip
+      # conn = Faraday.new(:url => 'http://127.0.0.1:9292/shutdown')
+      response = Faraday.get 'http://127.0.0.1:9292/hello'
+      output = "Hello World!(1)"
+      output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
+
+      assert_equal output_formatted, response.body
+    end
+
+    def test_faraday_root_path
+      skip
+      response = Faraday.get 'http://127.0.0.1:9292/'
+      output =     "\nVerb: GET\n" +
+          "Path: /\n" +
+          "Protocol: HTTP/1.1\n" +
+          "Host: Faradayv0.9.2\n" +
+          "Port: \n" +
+          "Origin: Faradayv0.9.2\n" +
+          "Accept: */*\n"
+      output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
+      assert_equal output_formatted, response.body
+    end
+
+    def test_faraday_datetime_path
+      skip
+      response = Faraday.get 'http://127.0.0.1:9292/datetime'
+      output = "#{Time.now.strftime('%l:%M %p on %A, %B %e, %Y')}"
+      output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
+
+      assert_equal output_formatted, response.body
+    end
+
+    def test_faraday_word_search_path
+      skip
+      response = Faraday.get 'http://127.0.0.1:9292/word_search=dog'
+      output = "DOG is a known word"
+      output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
+
+      assert_equal output_formatted, response.body
+    end
+
+    def test_faraday_word_shutdown_path
+      skip
+      response = Faraday.get 'http://127.0.0.1:9292/shutdown'
+      output = "Total Requests: 0"
+      output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
+
+      assert_equal output_formatted, response.body
+    end
   end
