@@ -34,7 +34,7 @@ class RequestParser
   end
 
   def accept
-    request[6].split(":")[1].strip
+    request[3].split(":")[1].strip
   end
 
   def response_hash
