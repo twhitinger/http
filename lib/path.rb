@@ -23,22 +23,22 @@ class Path
 
   def root
     # @status_code = ok
-    HtmlWrapper.wrap_response_in_html(request)
+  request
   end
 
   def hello
     # @status_code = ok
-    HtmlWrapper.wrap_response_in_html("Hello World!(#{@counter})")
+    "Hello World!(#{@counter})"
   end
 
   def datetime
     # @status_code = ok
-    HtmlWrapper.wrap_response_in_html("#{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}")
+    "#{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}"
   end
 
   def shutdown
 
-   HtmlWrapper.wrap_response_in_html("Total Requests: #{@counter}")
+   "Total Requests: #{@counter}"
   end
 
 end
