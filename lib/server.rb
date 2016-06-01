@@ -2,6 +2,7 @@ require 'socket'
 require 'pry'
 require './request_parser'
 require './html_wrapper'
+require './path.rb'
 
 
 # iteration 0
@@ -13,16 +14,14 @@ class Server
 
     loop do
       @client = tcp_server.accept
-
       # response = "<pre>" + "Hello, World! (#{counter})" + "</pre>"
       # output = "<html><body>#{response}</body></html>"
       request = RequestParser.new(server_request)
+      path = Path.new(request.path,request.response,counter)
 
-      path = request.response_hash['Path']
+      # path = request.response_hash['Path']
       # output = Path.new(path)
-      @client.puts HtmlWrapper.wrap_response_in_html(request.response) if path == "/"
-
-
+      @client.puts path.path_finder
 
       # output(counter)
       counter += 1
