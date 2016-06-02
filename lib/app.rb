@@ -7,5 +7,5 @@ class AppStart
   end
 
 end
-app_start = AppStart.new
-app_start.start
+# app_start = AppStart.new
+# app_start.start
