@@ -12,10 +12,10 @@ class WordFind
   end
 
   def exists(word)
-   "#{word.upcase} is a known word"
+   "#{word.upcase} is a known word."
   end
 
   def unknown(word)
-    "#{word.upcase} is not a known word"
+    "#{word.upcase} is not a known word."
   end
 end
