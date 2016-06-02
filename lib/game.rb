@@ -25,7 +25,7 @@ class Game
     elsif last_guess < correct_number
       "Your guess is too low."
     else last_guess == correct_number
-      "You done guess correct."
+      "You done guessed correct."
     end
   end
 
