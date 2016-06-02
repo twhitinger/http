@@ -20,7 +20,7 @@ class Server
       else
         thing = 0
       end
-      play_game(thing)
+      play_game(thing) if request.path == "/start_game" || request.path == "/game"
       @path = Path.new(request.path,request.response,counter,request)
       output = "<html><head></head><body><pre>#{path.path_finder}</pre></body></html>"
       print_or_shutdown(output)

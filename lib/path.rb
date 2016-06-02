@@ -5,7 +5,7 @@ require "pry"
 
 class Path
   attr_reader :path, :request, :full_request, :thing, :game
-  def initialize(path,request,counter = 0, full_request,thing)
+  def initialize(path, request, counter, full_request)
     @path = path
     @request = request
     @counter = counter
@@ -14,7 +14,7 @@ class Path
   end
 
   def path_finder
-      
+
     if path == "/"
       root
     elsif path == "/hello"
