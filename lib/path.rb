@@ -4,13 +4,14 @@ require './lib/request_parser'
 require "pry"
 
 class Path
-  attr_reader :path, :request, :full_request, :thing, :game
+  attr_reader :path, :request, :full_request, :thing, :game, :status_code
   def initialize(path, request, counter, full_request)
     @path = path
     @request = request
     @counter = counter
     @full_request = full_request
     @thing = thing
+    @status_code = "200 OK"
   end
 
   def path_finder
@@ -27,10 +28,6 @@ class Path
       word_find(path.split("=")[1])
     elsif path == "/start_game"
       "Good luck!"
-    # elsif path == "/game" && full_request.verb == "GET"
-    #   play_game
-    # elsif path == "/game" && full_request.verb == "POST"
-    #   play_game
     end
   end
 
@@ -52,23 +49,5 @@ class Path
   def shutdown
     "Total Requests: #{@counter}"
   end
-  # all after this should be in game
-  # def start_game
-  #   @game = Game.new
-  #   "Good luck!"
-  # end
 
-  # def play_game(thing = 0)
-  #   if path == "/start_game"
-  #     @game = Game.new
-  #     "Good luck!"
-  #   elsif full_request.verb == "GET"
-  #
-  #     game.guess_check(thing)
-  #   elsif full_request.verb == "POST"
-  #
-  #     game.guess_check(thing)
-  #   end
-  # end
-
-  end
+end
