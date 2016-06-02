@@ -59,7 +59,7 @@ class RequestParserTest < Minitest::Test
       "Host: #{parser.host}\n" +
       "Port: #{parser.port}\n" +
       "Origin: #{parser.origin}\n" +
-      "Accept: #{parser.accept}\n"
+      "Content-length: #{parser.accept}\n"
       assert_equal expected, parser.response
     end
 

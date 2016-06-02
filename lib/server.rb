@@ -13,14 +13,20 @@ class Server
     loop do
       @client = tcp_server.accept
       request = RequestParser.new(server_request)
-      @path = Path.new(request.path,request.response,counter)
+
+      thing = client.read(request.accept.to_i) if request.path == "/game" && request.verb == "POST"
+
+      @path = Path.new(request.path,request.response,counter,request,thing = 0)
       output = "<html><head></head><body><pre>#{path.path_finder}</pre></body></html>"
+
       print_or_shutdown(output)
       counter += 1
       client.close
     end
   end
 
+  def get_guess
+  end
   def print_or_shutdown(output)
     headers = ["http/1.1 200 ok",
           "date: #{Time.now.strftime('%a, %e %b %Y %H:%M:%S %z')}",

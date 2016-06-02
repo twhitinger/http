@@ -56,7 +56,7 @@ class RequestParser
     "Host: #{host}\n" +
     "Port: #{port}\n" +
     "Origin: #{origin}\n" +
-    "Accept: #{accept}\n"
+    "Content-length: #{accept}\n"
   end
 
 end
