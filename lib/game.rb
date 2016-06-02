@@ -5,15 +5,27 @@ class Game
     @correct_number = generate_random_number
   end
 
+  def summary
+    string = "There have been #{@count} guesses and the last guess was #{last_guess}, which was"
+    if @last_guess == nil
+      "Good Luck!"
+    elsif last_guess.to_i == correct_number
+      string + " correct."
+    else
+      last_guess.to_i > correct_number ? string  + " too high." : string  + " too low."
+    end
+  end
+
   def guess_check(last_guess = 0)
     @count += 1
+    @last_guess = last_guess.to_i
     last_guess = last_guess.to_i
     if last_guess > correct_number
-      "too high."
+      "Your guess is too high."
     elsif last_guess < correct_number
-      "too low."
-    elsif last_guess == correct_number
-      "Correct guess"
+      "Your guess is too low."
+    else last_guess == correct_number
+      "You done guess correct."
     end
   end
 

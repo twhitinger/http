@@ -1,8 +1,8 @@
 module HeaderGenerator
 
   def self.redirect_request(request, output, path)
-    # need to find out how to return status code,second param
 
+    # need to find out how to return status code,second param
     generate_output(output, path.status_code)
   end
 
