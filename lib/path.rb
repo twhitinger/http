@@ -40,9 +40,9 @@ class Path
       game.guess_check(number_guess)
     elsif path == "/force_error"
       @status_code = '500 Internal Server Error'
-      raise "SystemError"
-      rescue => exception
-      exception.backtrace.join("\n")
+      # raise "SystemError"
+      # rescue => exception
+      # exception.backtrace.join("\n")
     else
       @status_code = '404 Not Found'
     end
