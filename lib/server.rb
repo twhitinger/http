@@ -1,19 +1,21 @@
+
 require 'socket'
-require 'pry'
 require './lib/request_parser'
 require './lib/path.rb'
 require './lib/header_generator'
 require './lib/html_wrapper'
-
 class Server
 
-  attr_reader :path, :client, :request, :number_guess, :header
+  attr_reader :path, :client, :request, :number_guess, :header, :tcp_server
+  def initialize(start = false)
+    @tcp_server = TCPServer.new(9292) if start
+  end
 
   def start_server
     counter = 0
-    tcp_server = TCPServer.new(9292)
 
     loop do
+
       @client = tcp_server.accept
       @request = RequestParser.new(server_request)
       @path ||= Path.new(request.path,request.response,request,number_guess = nil,counter)
@@ -46,4 +48,10 @@ class Server
     end
     request_lines
   end
+end
+
+
+if __FILE__==$0
+  s = Server.new(true)
+  s.start_server
 end
