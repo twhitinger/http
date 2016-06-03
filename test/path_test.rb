@@ -4,7 +4,8 @@ require './lib/request_parser'
 require 'faraday'
 
 
-class PathTest < Minitest::Test
+class PathTest < Minitest::Unit::TestCase
+  i_suck_and_my_tests_are_order_dependent!
   def setup
     @parser = RequestParser.new(request).path
   end
@@ -45,15 +46,9 @@ class PathTest < Minitest::Test
       assert_equal "Total Requests: 0", path.shutdown
     end
 
-    def test_path_equals_slash_word_search
-      path = Path.new("/word_search=finish", @parser, full_request = nil, number_guess = 0, counter = 0)
-
-      assert_equal "FINISH is a known word.", path.word_find("finish")
-    end
-
     def test_faraday_hello_path
-      skip
-      # conn = Faraday.new(:url => 'http://127.0.0.1:9292/shutdown')
+
+
       response = Faraday.get 'http://127.0.0.1:9292/hello'
       output = "Hello World!(1)"
       output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
@@ -61,22 +56,29 @@ class PathTest < Minitest::Test
       assert_equal output_formatted, response.body
     end
 
+    def test_path_equals_slash_word_search
+      path = Path.new("/word_search=finish", @parser, full_request = nil, number_guess = 0, counter = 0)
+
+      assert_equal "FINISH is a known word.", path.word_find("finish")
+    end
+
+
     def test_faraday_root_path
-      skip
+
       response = Faraday.get 'http://127.0.0.1:9292/'
       output =     "\nVerb: GET\n" +
-          "Path: /\n" +
+          "Path: /datetime\n" +
           "Protocol: HTTP/1.1\n" +
           "Host: Faradayv0.9.2\n" +
           "Port: \n" +
           "Origin: Faradayv0.9.2\n" +
-          "Accept: */*\n"
+          "Content-length: */*\n"
       output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
       assert_equal output_formatted, response.body
     end
 
     def test_faraday_datetime_path
-      skip
+
       response = Faraday.get 'http://127.0.0.1:9292/datetime'
       output = "#{Time.now.strftime('%l:%M %p on %A, %B %e, %Y')}"
       output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
@@ -85,18 +87,18 @@ class PathTest < Minitest::Test
     end
 
     def test_faraday_word_search_path
-      skip
+
       response = Faraday.get 'http://127.0.0.1:9292/word_search=dog'
-      output = "DOG is a known word"
+      output = "DOG is a known word."
       output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
 
       assert_equal output_formatted, response.body
     end
 
     def test_faraday_word_shutdown_path
-      skip
+
       response = Faraday.get 'http://127.0.0.1:9292/shutdown'
-      output = "Total Requests: 0"
+      output = "Total Requests: 4"
       output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
 
       assert_equal output_formatted, response.body
