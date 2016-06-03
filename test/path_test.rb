@@ -10,12 +10,12 @@ class PathTest < Minitest::Unit::TestCase
   def setup
     @parser = RequestParser.new(request).path
   end
-  
+
   def test_faraday_hello_path
 
 
     response = Faraday.get 'http://127.0.0.1:9292/hello'
-    output = "Hello World!(2)"
+    output = "Hello World!(1)"
     output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
 
     assert_equal output_formatted, response.body
@@ -64,24 +64,12 @@ class PathTest < Minitest::Unit::TestCase
   def test_faraday_word_shutdown_path
 
     response = Faraday.get 'http://127.0.0.1:9292/shutdown'
-    output = "Total Requests: 6"
+    output = "Total Requests: 5"
     output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
 
     assert_equal output_formatted, response.body
   end
 
-  def test_faraday_force_error
-    response = Faraday.get 'http://127.0.0.1:9292/force_error'
-
-    output_formatted = "<html><head></head><body><pre>/Users/midas/turing/projects/http/lib/path.rb:49:in `get_path_error'
-/Users/midas/turing/projects/http/lib/path.rb:42:in `path_finder'
-lib/server.rb:25:in `block in start_server'
-lib/server.rb:17:in `loop'
-lib/server.rb:17:in `start_server'
-lib/server.rb:56:in `<main>'</pre></body></html>"
-
-    assert_equal output_formatted, response.body
-  end
 
   def test_faraday_word_404
 
