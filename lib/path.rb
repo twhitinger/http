@@ -32,9 +32,11 @@ class Path
       @game ||= Game.new
       @status_code = '302 Found'
     elsif full_request.verb == "GET" && path == "/game"
+      return  "You need to start the Game!" if game.nil?
       @status_code = '200 OK'
       game.summary
     elsif full_request.verb == "POST" && path == "/game"
+      return  "You need to start the Game!" if game.nil?
       @status_code = '302 Found'
       game.guess_check(number_guess)
     elsif path == "/force_error"
