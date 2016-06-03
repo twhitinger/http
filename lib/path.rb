@@ -5,8 +5,8 @@ require './lib/game'
 require "pry"
 
 class Path
-  attr_reader :path, :request, :full_request, :game, :status_code, :number_guess
-  attr_accessor :counter, :number_guess
+  attr_reader  :request, :game, :status_code, :number_guess, :path
+  attr_accessor :counter, :number_guess, :full_request
   def initialize(path, request, full_request, number_guess, counter)
     @path = path
     @request = request
@@ -33,14 +33,15 @@ class Path
       @game ||= Game.new
       "Good luck!"
     elsif full_request.verb == "GET" && path == "/game"
+      @status_code = '200 OK'
       game.summary
     elsif full_request.verb == "POST" && path == "/game"
+       @status_code = '302 Found'
       game.guess_check(number_guess)
     end
   end
 
   def root
-
     # @status_code = ok
     request
   end
