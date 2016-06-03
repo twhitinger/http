@@ -33,7 +33,6 @@ class Server
     client.read(request.accept.to_i)
   end
 
-
   def print_or_shutdown(output,header)
     client.puts header
     client.puts output
