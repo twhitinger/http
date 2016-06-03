@@ -36,7 +36,7 @@ class Path
       @status_code = '200 OK'
       game.summary
     elsif full_request.verb == "POST" && path == "/game"
-       @status_code = '302 Found'
+      @status_code = '302 Found'
       game.guess_check(number_guess)
     elsif path == "/force_error"
       @status_code = '500 Internal Server Error'
