@@ -1,9 +1,9 @@
-require './test/test_helper'
 require './lib/request_parser'
+require './test/test_helper'
 
 class RequestParserTest < Minitest::Test
-
-  attr_reader :parser
+    attr_reader :parser
+    
   def setup
     @parser = RequestParser.new(request)
   end
@@ -18,48 +18,48 @@ class RequestParserTest < Minitest::Test
       "Accept: */*",
       "Accept-Encoding: gzip, deflate, sdch",
       "Accept-Language: en-US,en;q=0.8"]
-    end
-
-    def test_it_returns_verb
-
-      assert_equal "GET", parser.verb
-    end
-
-    def test_it_returns_path
-
-      assert_equal "/", parser.path
-    end
-
-    def test_it_returns_protocol
-
-      assert_equal "HTTP/1.1", parser.protocol
-    end
-
-    def test_it_returns_host
-
-      assert_equal "127.0.0.1", parser.host
-    end
-
-    def test_it_returns_port
-
-      assert_equal "9292", parser.port
-    end
-
-    def test_it_returns_origin
-
-      assert_equal "127.0.0.1", parser.origin
-    end
-
-    def test_it_packages_response
-
-      expected =
-      "\nVerb: #{parser.verb}\n" +
-      "Path: #{parser.path}\n" +
-      "Protocol: #{parser.protocol}\n" +
-      "Host: #{parser.host}\n" +
-      "Port: #{parser.port}\n" +
-      "Origin: #{parser.origin}\n" +
-      "Content-length: #{parser.accept}\n"
-      assert_equal expected, parser.response
-    end
   end
+
+  def test_it_returns_verb
+
+    assert_equal "GET", parser.verb
+  end
+
+  def test_it_returns_path
+
+    assert_equal "/", parser.path
+  end
+
+  def test_it_returns_protocol
+
+    assert_equal "HTTP/1.1", parser.protocol
+  end
+
+  def test_it_returns_host
+
+    assert_equal "127.0.0.1", parser.host
+  end
+
+  def test_it_returns_port
+
+    assert_equal "9292", parser.port
+  end
+
+  def test_it_returns_origin
+
+    assert_equal "127.0.0.1", parser.origin
+  end
+
+  def test_it_packages_response
+
+    expected =
+    "\nVerb: #{parser.verb}\n" +
+    "Path: #{parser.path}\n" +
+    "Protocol: #{parser.protocol}\n" +
+    "Host: #{parser.host}\n" +
+    "Port: #{parser.port}\n" +
+    "Origin: #{parser.origin}\n" +
+    "Content-length: #{parser.accept}\n"
+    assert_equal expected, parser.response
+  end
+end

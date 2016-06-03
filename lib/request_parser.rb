@@ -1,10 +1,6 @@
-# iteration 1 create a hash
-require "pry"
-
-# change raw output to a hash
-
 class RequestParser
   attr_reader :request
+  
   def initialize(request)
     @request = request
   end

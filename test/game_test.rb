@@ -1,11 +1,9 @@
 require './test/test_helper'
 require './lib/game'
-require 'faraday'
-
 
 class GameTest < Minitest::Test
   attr_reader :game
-  
+
   def setup
     @game ||= Game.new
   end
