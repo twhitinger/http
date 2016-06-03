@@ -45,6 +45,12 @@ class PathTest < Minitest::Test
       assert_equal "Total Requests: 0", path.shutdown
     end
 
+    def test_path_equals_slash_word_search
+      path = Path.new("/word_search=finish", @parser, full_request = nil, number_guess = 0, counter = 0)
+
+      assert_equal "FINISH is a known word.", path.word_find("finish")
+    end
+
     def test_faraday_hello_path
       skip
       # conn = Faraday.new(:url => 'http://127.0.0.1:9292/shutdown')
