@@ -22,25 +22,25 @@ class PathTest < Minitest::Test
     end
 
     def test_path_equals_root
-      path = Path.new("/", @parser, full_request = nil, thing = 0)
+      path = Path.new("/", @parser, full_request = nil, number_guess = 0, counter = 0)
 
       assert_equal "/", path.root
     end
 
     def test_path_equals_slash_hello
-      path = Path.new("/hello", @parser, full_request = nil, thing = 0)
+      path = Path.new("/hello", @parser, full_request = nil, number_guess = 0, counter = 0)
 
       assert_equal "Hello World!(0)", path.hello
     end
 
     def test_path_equals_slash_datetime
-      path = Path.new("/datetime", @parser, full_request = nil, thing = 0)
+      path = Path.new("/datetime", @parser, full_request = nil, number_guess = 0, counter = 0)
 
       assert_equal "#{Time.now.strftime('%l:%M %p on %A, %B %e, %Y')}", path.datetime
     end
 
     def test_path_equals_slash_shutdown
-      path = Path.new("/shutdown", @parser, full_request = nil, thing = 0)
+      path = Path.new("/shutdown", @parser, full_request = nil, number_guess = 0, counter = 0)
 
       assert_equal "Total Requests: 0", path.shutdown
     end
