@@ -21,7 +21,6 @@ class Server
       number_guess = redirect_game(request) if request.path == "/game" && request.verb == "POST"
       path.number_guess = number_guess if request.path == "/game" && request.verb == "POST"
       output = HtmlWrapper.wrap_response_in_html(path.path_finder(request.path))
-
       header = HeaderGenerator.redirect_request(request,output,path)
       print_or_shutdown(output,header)
       counter += 1

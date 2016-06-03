@@ -71,7 +71,6 @@ class Path
   end
 
   def word_find(word)
-    counter += 1
     WordFind.new.find(word)
   end
 end

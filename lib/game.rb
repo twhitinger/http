@@ -7,7 +7,7 @@ class Game
 
   def summary
     string = "There have been #{@count} guesses and the last guess was #{last_guess}, which was"
-    if @last_guess == nil
+    if @last_guess.nil?
       "Game Started, guess a number!"
     elsif last_guess.to_i == correct_number
       string + " correct."
