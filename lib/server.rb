@@ -17,7 +17,6 @@ class Server
       @client = tcp_server.accept
       @request = RequestParser.new(server_request)
       @path ||= Path.new(request.path,request.response,request,number_guess = nil,counter)
-      
       path.full_request = request
       number_guess = redirect_game(request) if request.path == "/game" && request.verb == "POST"
       path.number_guess = number_guess if request.path == "/game" && request.verb == "POST"

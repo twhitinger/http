@@ -29,15 +29,22 @@ class Path
     elsif path == "/word_search=#{path.split("=")[1]}"
       word_find(path.split("=")[1])
     elsif path == "/start_game" && full_request.verb == "POST"
-      # @status_code = '302 Found'
+      @status_code = '403 Forbidden' if @game
       @game ||= Game.new
-      "Good luck!"
+      @status_code = '302 Found'
     elsif full_request.verb == "GET" && path == "/game"
       @status_code = '200 OK'
       game.summary
     elsif full_request.verb == "POST" && path == "/game"
        @status_code = '302 Found'
       game.guess_check(number_guess)
+    elsif path == "/force_error"
+      @status_code = '500 Internal Server Error'
+      raise "SystemError"
+      rescue => exception
+      exception.backtrace.join("\n")
+    else
+      @status_code = '404 Not Found'
     end
   end
 
