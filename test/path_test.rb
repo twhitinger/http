@@ -1,6 +1,7 @@
 require './test/test_helper'
 require './lib/path'
 require './lib/request_parser'
+require './lib/game'
 require 'faraday'
 
 
@@ -50,7 +51,7 @@ class PathTest < Minitest::Unit::TestCase
 
 
       response = Faraday.get 'http://127.0.0.1:9292/hello'
-      output = "Hello World!(1)"
+      output = "Hello World!(2)"
       output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
 
       assert_equal output_formatted, response.body
@@ -66,6 +67,7 @@ class PathTest < Minitest::Unit::TestCase
     def test_faraday_root_path
 
       response = Faraday.get 'http://127.0.0.1:9292/'
+
       output =     "\nVerb: GET\n" +
           "Path: /datetime\n" +
           "Protocol: HTTP/1.1\n" +
@@ -98,7 +100,29 @@ class PathTest < Minitest::Unit::TestCase
     def test_faraday_word_shutdown_path
 
       response = Faraday.get 'http://127.0.0.1:9292/shutdown'
-      output = "Total Requests: 4"
+      output = "Total Requests: 6"
+      output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
+
+      assert_equal output_formatted, response.body
+    end
+
+    def test_faraday_force_error
+      response = Faraday.get 'http://127.0.0.1:9292/force_error'
+
+      output_formatted = "<html><head></head><body><pre>/Users/midas/turing/projects/http/lib/path.rb:49:in `get_path_error'
+/Users/midas/turing/projects/http/lib/path.rb:42:in `path_finder'
+lib/server.rb:25:in `block in start_server'
+lib/server.rb:17:in `loop'
+lib/server.rb:17:in `start_server'
+lib/server.rb:56:in `<main>'</pre></body></html>"
+
+      assert_equal output_formatted, response.body
+    end
+
+    def test_faraday_word_404
+
+      response = Faraday.get 'http://127.0.0.1:9292/thedragonisreal'
+      output = "404 Not Found"
       output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
 
       assert_equal output_formatted, response.body
