@@ -6,7 +6,7 @@ require "pry"
 class Path
   attr_reader  :request, :game, :status_code, :number_guess, :path
   attr_accessor :counter, :number_guess, :full_request
-  
+
   def initialize(path, request, full_request, number_guess, counter)
     @path = path
     @request = request
@@ -39,12 +39,16 @@ class Path
       game.guess_check(number_guess)
     elsif path == "/force_error"
       @status_code = '500 Internal Server Error'
-      # raise "SystemError"
-      # rescue => exception
-      # exception.backtrace.join("\n")
+      get_path_error
     else
       @status_code = '404 Not Found'
     end
+  end
+
+  def get_path_error
+    raise SystemError
+  rescue => detail
+    detail.backtrace.join("\n")
   end
 
   def root
