@@ -29,5 +29,4 @@ module HeaderGenerator
     "content-type: text/html; charset=iso-8859-1",
     "content-length: #{output_length}\r\n\r\n"]
   end
-
 end

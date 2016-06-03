@@ -1,12 +1,12 @@
-
 require 'socket'
 require './lib/request_parser'
 require './lib/path.rb'
 require './lib/header_generator'
 require './lib/html_wrapper'
-class Server
 
+class Server
   attr_reader :path, :client, :request, :number_guess, :header, :tcp_server
+
   def initialize(start = false)
     @tcp_server = TCPServer.new(9292) if start
   end

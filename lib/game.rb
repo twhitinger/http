@@ -1,8 +1,8 @@
 class Game
   attr_reader :guess, :correct_number, :last_guess, :count
-  
+
   def initialize
-    @count = 0
+    @count          = 0
     @correct_number = generate_random_number
   end
 
@@ -33,5 +33,4 @@ class Game
   def generate_random_number
     rand(1..100)
   end
-
 end

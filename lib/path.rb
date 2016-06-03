@@ -1,18 +1,17 @@
 require "./lib/word_find"
 require './lib/request_parser'
 require './lib/game'
-require "pry"
 
 class Path
   attr_reader  :request, :game, :status_code, :number_guess, :path
   attr_accessor :counter, :number_guess, :full_request
 
   def initialize(path, request, full_request, number_guess, counter)
-    @path = path
-    @request = request
+    @path         = path
+    @request      = request
     @full_request = full_request
-    @counter = counter
-    @status_code = "200 OK"
+    @counter      = counter
+    @status_code  = "200 OK"
     @number_guess = number_guess
   end
 
