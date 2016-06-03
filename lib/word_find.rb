@@ -4,15 +4,11 @@ class WordFind
   end
 
   def find(word)
-    if @dictionary.include?(word)
-      exists(word)
-    else
-      unknown(word)
-    end
+    @dictionary.include?(word) ? exists(word) : unknown(word)
   end
 
   def exists(word)
-   "#{word.upcase} is a known word."
+    "#{word.upcase} is a known word."
   end
 
   def unknown(word)
