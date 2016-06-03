@@ -1,9 +1,7 @@
 require './test/test_helper'
-require './lib/path'
 require './lib/request_parser'
+require './lib/path'
 require './lib/game'
-require 'faraday'
-
 
 class PathTest < Minitest::Unit::TestCase
 
@@ -12,8 +10,6 @@ class PathTest < Minitest::Unit::TestCase
   end
 
   def test_faraday_hello_path
-
-
     response = Faraday.get 'http://127.0.0.1:9292/hello'
     output = "Hello World!(1)"
     output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
@@ -29,9 +25,7 @@ class PathTest < Minitest::Unit::TestCase
 
 
   def test_faraday_root_path
-
     response = Faraday.get 'http://127.0.0.1:9292/'
-
     output =     "\nVerb: GET\n" +
         "Path: /datetime\n" +
         "Protocol: HTTP/1.1\n" +
@@ -40,11 +34,11 @@ class PathTest < Minitest::Unit::TestCase
         "Origin: Faradayv0.9.2\n" +
         "Content-length: */*\n"
     output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
+
     assert_equal output_formatted, response.body
   end
 
   def test_faraday_datetime_path
-
     response = Faraday.get 'http://127.0.0.1:9292/datetime'
     output = "#{Time.now.strftime('%l:%M %p on %A, %B %e, %Y')}"
     output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
@@ -53,7 +47,6 @@ class PathTest < Minitest::Unit::TestCase
   end
 
   def test_faraday_word_search_path
-
     response = Faraday.get 'http://127.0.0.1:9292/word_search=dog'
     output = "DOG is a known word."
     output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
@@ -62,7 +55,6 @@ class PathTest < Minitest::Unit::TestCase
   end
 
   def test_faraday_word_shutdown_path
-
     response = Faraday.get 'http://127.0.0.1:9292/shutdown'
     output = "Total Requests: 5"
     output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
@@ -72,7 +64,6 @@ class PathTest < Minitest::Unit::TestCase
 
 
   def test_faraday_word_404
-
     response = Faraday.get 'http://127.0.0.1:9292/thedragonisreal'
     output = "404 Not Found"
     output_formatted = "<html><head></head><body><pre>#{output}</pre></body></html>"
@@ -116,5 +107,4 @@ class PathTest < Minitest::Unit::TestCase
       assert_equal "Total Requests: 0", path.shutdown
     end
     i_suck_and_my_tests_are_order_dependent!
-
   end

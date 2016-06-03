@@ -1,12 +1,13 @@
 
-require 'socket'
-require './lib/request_parser'
-require './lib/path.rb'
 require './lib/header_generator'
+require './lib/request_parser'
 require './lib/html_wrapper'
-class Server
+require './lib/path.rb'
+require 'socket'
 
+class Server
   attr_reader :path, :client, :request, :number_guess, :header, :tcp_server
+
   def initialize(start = false)
     @tcp_server = TCPServer.new(9292) if start
   end
@@ -15,7 +16,6 @@ class Server
     counter = 0
 
     loop do
-
       @client = tcp_server.accept
       @request = RequestParser.new(server_request)
       @path ||= Path.new(request.path,request.response,request,number_guess = nil,counter)
