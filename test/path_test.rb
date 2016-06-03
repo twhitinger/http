@@ -2,8 +2,6 @@ require './test/test_helper'
 require './lib/path'
 require './lib/request_parser'
 require './lib/game'
-# require 'faraday'
-
 
 class PathTest < Minitest::Unit::TestCase
 
